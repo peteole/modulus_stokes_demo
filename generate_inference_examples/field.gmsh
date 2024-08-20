@@ -1,0 +1,41 @@
+// Define the geometry
+Point(1) = {0, 0, 0, 1.0};
+Point(2) = {1, 0, 0, 1.0};
+Point(3) = {1, 1, 0, 1.0};
+Point(4) = {0, 1, 0, 1.0};
+
+Line(1) = {1, 2};
+Line(2) = {2, 3};
+Line(3) = {3, 4};
+Line(4) = {4, 1};
+
+Line Loop(1) = {1, 2, 3, 4};
+Plane Surface(1) = {1};
+
+// Define physical groups
+Physical Line("Left") = {4};
+Physical Line("Right") = {2};
+Physical Surface("Surface") = {1};
+
+// Mesh the geometry
+Mesh 2;
+
+// Assign marker values to nodes
+Field[1] = Distance;
+Field[1].NodesList = {1, 4}; // Left boundary nodes
+Field[2] = Distance;
+Field[2].NodesList = {2, 3}; // Right boundary nodes
+
+Field[3] = MathEval;
+Field[3].F = "1"; // Marker value for left boundary
+Field[3].NodesList = {1, 4};
+
+Field[4] = MathEval;
+Field[4].F = "2"; // Marker value for right boundary
+Field[4].NodesList = {2, 3};
+
+Field[5] = MathEval;
+Field[5].F = "0"; // Marker value for inner nodes
+
+// Export the mesh to a VTK file
+Save "2d_mesh.vtk";

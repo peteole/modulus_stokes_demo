@@ -1,0 +1,39 @@
+// Step 1: Define the Geometry
+// Define Points (Corner Points of the Rectangle - Wind Channel)
+Point(1) = {0, 0, 0, 1.0};   // Bottom left corner of channel
+Point(2) = {2, 0, 0, 1.0};   // Bottom right corner of channel
+Point(3) = {2, 0.5, 0, 1.0}; // Top right corner of channel
+Point(4) = {0, 0.5, 0, 1.0}; // Top left corner of channel
+
+// Define the Polygon (Triangular Polygon inside the channel)
+Point(5) = {0.5, 0.1, 0, 1.0};  // First point of the triangle
+Point(6) = {1.5, 0.1, 0, 1.0};  // Second point of the triangle
+Point(7) = {1, 0.4, 0, 1.0};    // Third point of the triangle
+
+// Define Lines for the Wind Channel
+Line(1) = {1, 2};  // Bottom edge (wall)
+Line(2) = {2, 3};  // Right edge (open)
+Line(3) = {3, 4};  // Top edge (wall)
+Line(4) = {4, 1};  // Left edge (open)
+
+// Define Lines for the Polygon (Triangle)
+Line(5) = {5, 6};  // Bottom edge of the triangle (wall)
+Line(6) = {6, 7};  // Right edge of the triangle (wall)
+Line(7) = {7, 5};  // Left edge of the triangle (wall)
+
+// Define Surface Loops
+Line Loop(1) = {1, 2, 3, 4};  // Loop for the outer rectangle (wind channel)
+Line Loop(2) = {5, 6, 7};     // Loop for the inner triangle (polygon)
+
+// Define Plane Surfaces
+Plane Surface(1) = {1, 2};    // Surface for the wind channel with the polygon inside
+
+// Step 2: Define the Mesh
+// Set mesh element size on the lines
+Characteristic Length{1, 2, 3, 4, 5, 6, 7} = 0.05;
+
+// Step 3: Mesh Generation
+// Generate 2D mesh
+Mesh 2;
+
+Save "wind_channel.vtk";
