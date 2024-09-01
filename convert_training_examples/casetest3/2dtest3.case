@@ -1,0 +1,21 @@
+FORMAT
+type: ensight gold
+GEOMETRY
+model: 2dtest300000.geo
+VARIABLE
+scalar per node: Pressure 2dtest3*****.Pressure
+scalar per node: VelocityMagnitude 2dtest3*****.VelocityMagnitude
+scalar per node: Velocityi 2dtest3*****.Velocityi
+scalar per node: Velocityj 2dtest3*****.Velocityj
+vector per node: Velocity 2dtest3*****.Velocity
+TIME
+time set:               1
+number of steps:        1
+filename start number:  0
+filename increment:     1
+time values:
+0
+
+#SCRIPTS
+#metadata: starccmplus.xml
+

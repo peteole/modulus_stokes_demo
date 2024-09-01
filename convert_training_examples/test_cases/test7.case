@@ -1,0 +1,21 @@
+FORMAT
+type: ensight gold
+GEOMETRY
+model: test700000.geo
+VARIABLE
+scalar per element: Pressure test7*****.Pressure
+scalar per element: VelocityMagnitude test7*****.VelocityMagnitude
+scalar per element: Velocityi test7*****.Velocityi
+scalar per element: Velocityj test7*****.Velocityj
+vector per element: Velocity test7*****.Velocity
+TIME
+time set:               1
+number of steps:        1
+filename start number:  0
+filename increment:     1
+time values:
+0
+
+#SCRIPTS
+#metadata: starccmplus.xml
+
