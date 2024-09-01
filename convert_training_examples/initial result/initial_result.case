@@ -1,0 +1,20 @@
+FORMAT
+type: ensight gold
+GEOMETRY
+model: initial_result00000.geo
+VARIABLE
+scalar per node: Pressure initial_result*****.Pressure
+scalar per node: Velocityi initial_result*****.Velocityi
+scalar per node: Velocityj initial_result*****.Velocityj
+vector per node: Velocity initial_result*****.Velocity
+TIME
+time set:               1
+number of steps:        1
+filename start number:  0
+filename increment:     1
+time values:
+0
+
+#SCRIPTS
+#metadata: starccmplus.xml
+
