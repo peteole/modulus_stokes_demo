@@ -38,7 +38,7 @@ epochs: 500
 
 num_training_samples: 500
 num_validation_samples: 10
-num_test_samples: 2
+num_test_samples: 1
 
 lr: 1e-4
 lr_decay_rate: 0.99985
