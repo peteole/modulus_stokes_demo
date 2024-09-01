@@ -5,4 +5,4 @@ polygon_points=select_geometry.create_polygon((channel_length,channel_height))
 print("Selected points:", polygon_points)
 
 import meshing
-meshing.mesh_polygon(channel_length, channel_height,polygon_points, 'meshes/test/0')
+meshing.mesh_polygon(channel_length, channel_height,polygon_points, '../inference_examples/test/0')
