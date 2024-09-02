@@ -12,3 +12,4 @@ dataset_old/
 checkpoints_starccm/
 starccm_dataset/sim_res_25900000.Pressure
 **/__pycache__/*
+convert_training_examples/training_set_500
