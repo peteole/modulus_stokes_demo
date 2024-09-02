@@ -37,9 +37,9 @@ aggregation: "sum"
 batch_size: 1
 epochs: 500
 
-num_training_samples: 4
-num_validation_samples: 1
-num_test_samples: 1
+num_training_samples: 224
+num_validation_samples: 28
+num_test_samples: 28
 
 lr: 1e-4
 lr_decay_rate: 0.99985

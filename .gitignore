@@ -10,3 +10,4 @@ convert_training_examples/starccm_dataset
 convert_training_examples/starccm_vtp
 dataset_old/
 checkpoints_starccm/
+starccm_dataset/sim_res_25900000.Pressure
