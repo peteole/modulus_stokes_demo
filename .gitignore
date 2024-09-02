@@ -6,3 +6,7 @@
 **/.DS_Store
 =22
 inference_preprocessing/tmp.vtk
+convert_training_examples/starccm_dataset
+convert_training_examples/starccm_vtp
+dataset_old/
+checkpoints_starccm/

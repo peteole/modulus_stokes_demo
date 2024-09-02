@@ -19,10 +19,11 @@ hydra:
     chdir: True
   run:
     dir: ./outputs/
-  
-ckpt_path: "./checkpoints"
+ 
+ckpt_path: "./checkpoints_starccm" 
+#ckpt_path: "./checkpoints"
 ckpt_name: "./stokes.pt"
-data_dir: "./inference_examples"
+data_dir: "./dataset"
 results_dir: "./results"
 
 input_dim_nodes: 7
@@ -36,8 +37,8 @@ aggregation: "sum"
 batch_size: 1
 epochs: 500
 
-num_training_samples: 500
-num_validation_samples: 10
+num_training_samples: 4
+num_validation_samples: 1
 num_test_samples: 1
 
 lr: 1e-4

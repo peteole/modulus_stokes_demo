@@ -19,7 +19,7 @@ import shutil
 import random
 
 # Define the directory that contains the original files
-data_dir = "results"
+data_dir = "convert_training_examples/starccm_vtp"
 
 # Define the directories for your train, validation, and test datasets
 train_dir = "./dataset/train"
