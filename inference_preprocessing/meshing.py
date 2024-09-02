@@ -73,11 +73,13 @@ def mesh_polygon(channel_length:float, channel_height:float, polygon_points:List
     # mark all edge points with 4
     grid.point_data["marker"][np.where(np.isin(grid.points,edge_points).all(axis=1))] = 4
 
-    # set marker to 1 at inlet and outlet
+    # set marker to 1 at inlet and 2 at outlet
     grid.point_data["marker"][points[:,0]==0.0]=1
-    grid.point_data["marker"][points[:,0]==channel_length]=1
+    grid.point_data["marker"][points[:,0]==channel_length]=2
 
-
+    # set marker to 3 at top and bottom walls
+    grid.point_data["marker"][points[:,1]==0.0]=3
+    grid.point_data["marker"][points[:,1]==channel_height]=3
 
     for target in ["p","u","v"]:
         grid.point_data[target]=np.zeros(num_points)
