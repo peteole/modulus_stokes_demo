@@ -1,4 +1,4 @@
-virtualenv venv
+virtualenv -p python3.11 venv
 source venv/bin/activate
 pip install "pip==23.2.1" "setuptools==68.2.2"
 pip install  --no-cache-dir  --force-reinstall --upgrade torch
