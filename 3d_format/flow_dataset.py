@@ -72,7 +72,7 @@ class FlowDataset(DGLDataset):
         data_dir,
         split="train",
         num_samples=10,
-        invar_keys=["pos"],
+        invar_keys=["pos", "marker"],
         outvar_keys=["velocity", "pressure"],
         normalize_keys=["velocity", "pressure"],
         force_reload=False,
@@ -289,14 +289,24 @@ class FlowDataset(DGLDataset):
             edges_to.extend(neighbors)
 
         # Create DGL graph using the connectivity information
-        graph=dgl.graph((edges_from, edges_to),num_nodes=grid.n_points)
+        graph = dgl.graph((edges_from, edges_to), num_nodes=grid.n_points)
         graph.ndata['pos'] = torch.tensor(grid.points, dtype=torch.float32)
         graph.ndata['velocity'] = torch.tensor(grid.point_data['Velocity'], dtype=torch.float32)
-        graph.ndata['pressure'] = torch.tensor(grid.point_data['Pressure'], dtype=torch.float32).reshape(-1,1)
-        # marker = np.array(point_data.GetArray("marker"))
-        # num_classes = 5
-        # one_hot_marker = np.eye(num_classes)[marker.astype(int)]
-        # graph.ndata["marker"] = torch.tensor(one_hot_marker, dtype=torch.float32)
+        graph.ndata['pressure'] = torch.tensor(grid.point_data['Pressure'], dtype=torch.float32).reshape(-1, 1)
+
+        # Determine dominant flow direction
+        avg_velocity = torch.mean(torch.abs(graph.ndata['velocity']), dim=0) # TODO change to avoid computing with whole tensor 
+        dominant_direction = torch.argmax(avg_velocity).item()
+
+        # Create marker points for the inlet and outlet
+        num_classes = 2
+        marker = np.zeros((grid.n_points, num_classes), dtype=np.float32)
+        graph.ndata["marker"] = torch.tensor(marker, dtype=torch.float32)
+        min_coord = np.min(grid.points[:, dominant_direction])
+        max_coord = np.max(grid.points[:, dominant_direction])
+        graph.ndata["marker"][grid.points[:, dominant_direction] == min_coord] = torch.tensor([1, 0], dtype=torch.float32)
+        graph.ndata["marker"][grid.points[:, dominant_direction] == max_coord] = torch.tensor([0, 1], dtype=torch.float32)
+        # TODO add other markers for other boundaries
 
         # Extract node attributes from the vtkPolyData
         # point_data = polydata.GetPointData()
